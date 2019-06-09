@@ -1,5 +1,7 @@
 ---
 
+- name: updating system
+  raw: apt-get update -y
   
 - name: Install Postgres server
   apt: pkg=postgresql-9.3 state=present
