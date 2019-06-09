@@ -3,11 +3,11 @@
 - name: updating system
   raw: apt-get update -y
 
-- name: updating system
+- name: upgrading system
   raw: apt-get upgrade -y  
   
 - name: Install Postgres server
-  apt: pkg=postgresql-9.6 state=present
+  raw: sudo apt-get install postgresql postgresql-contrib
 
 - name: Install Postgres server
   apt: pkg=postgresql-server-dev-9.1  state=present
