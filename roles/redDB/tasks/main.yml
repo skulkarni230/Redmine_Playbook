@@ -12,7 +12,7 @@
   notify: restart Postgres
 
 - name: allow password access to redmine db
-  lineinfile: "dest=/etc/postgresql/9.1/main/pg_hba.conf state=present
+  lineinfile: "dest=/etc/postgresql/10/main/pg_hba.conf state=present
     regexp='^local redmine redmine'
     insertafter='^# TYPE  DATABASE'
     line='local redmine redmine md5# inserted by ansible-playbook-redmine-git'"
