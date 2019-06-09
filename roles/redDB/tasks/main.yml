@@ -25,7 +25,7 @@
   service: name=postgresql enabled=true
 
 - name: Install python-psycopg2
-  apt: pkg=python-psycopg2 state=present
+  raw: sudo apt-get install python-psycopg2 -y
  
 - name: generate DB user password
   set_fact: redmine_db_pass={{ lookup('password', '/etc/ansible/redmine_db_pass') }}
