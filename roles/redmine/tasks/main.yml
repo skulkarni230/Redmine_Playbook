@@ -1,0 +1,29 @@
+---
+
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+
+- name: install system packages required for redmine
+  apt: pkg=imagemagick state=present
+
+- name: install system packages required for redmine
+  apt: pkg=libmagickwand-dev state=present
+
+- name: install system packages required for redmine
+  apt: pkg=libxslt1-dev state=present
+
+- name: install system packages required for redmine
+  apt: pkg=libxml2-dev state=present
+
+- name: install system packages required for redmine
+  apt: pkg=mercurial state=present
+
+- name: install system packages required for redmine
+  apt: pkg=nullmailer state=present
+
+- name: Install redmine
+  apt: pkg=redmine state=installed force=yes update_cache=yes
+
+

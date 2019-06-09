@@ -1,0 +1,41 @@
+---
+
+  
+- name: Install Postgres server
+  apt: pkg=postgresql-9.1 state=present
+
+- name: Install Postgres server
+  apt: pkg=postgresql-server-dev-9.1  state=present
+
+- name: Install Postgres server
+  apt: pkg=postgresql-contrib-9.1  state=present
+
+  notify: restart Postgres
+
+- name: allow password access to redmine db
+  lineinfile: "dest=/etc/postgresql/9.1/main/pg_hba.conf state=present
+    regexp='^local redmine redmine'
+    insertafter='^# TYPE  DATABASE'
+    line='local redmine redmine md5# inserted by ansible-playbook-redmine-git'"
+  notify: restart Postgres
+
+- name: start postgres service
+  service: name=postgresql state=started
+
+- name: start postgres service on boot
+  service: name=postgresql enabled=true
+
+- name: Install python-psycopg2
+  apt: pkg=python-psycopg2 state=present
+ 
+- name: generate DB user password
+  set_fact: redmine_db_pass={{ lookup('password', '/etc/ansible/redmine_db_pass') }}
+  when: redmine_db_pass is not defined or not redmine_db_pass
+
+- name: Create Redmine DB User
+  sudo_user: postgres
+  postgresql_user: name={{ redmine_db_user }} password={{ redmine_db_pass }} state=present
+
+- name: Create Redmine Database
+  sudo_user: postgres
+  postgresql_db: name={{ redmine_db_name }} owner={{ redmine_db_user }} encoding=UTF8 template=template0 state=present
