@@ -1,5 +1,12 @@
 ---
  - hosts: all
+   become: true
+   tasks:
+     - name: Update all packages to the latest version
+       become: true
+       apt:
+           name: aptitude
+           upgrade: yes
    roles:
         - redDB
         - redmine
