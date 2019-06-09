@@ -5,8 +5,7 @@
      - name: Update all packages to the latest version
        become: true
        apt:
-           name: aptitude
-           upgrade: yes
+           upgrade: dist
    roles:
         - redDB
         - redmine
