@@ -9,12 +9,6 @@
 - name: Install Postgres server
   raw: sudo apt-get install postgresql postgresql-contrib -y
 
-- name: Install Postgres server
-  apt: pkg=postgresql-server-dev-9.1  state=present
-
-- name: Install Postgres server
-  apt: pkg=postgresql-contrib-9.1  state=present
-
   notify: restart Postgres
 
 - name: allow password access to redmine db
