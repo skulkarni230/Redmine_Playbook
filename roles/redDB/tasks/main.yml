@@ -7,7 +7,7 @@
   raw: apt-get upgrade -y  
   
 - name: Install Postgres server
-  raw: sudo apt-get install postgresql postgresql-contrib
+  raw: sudo apt-get install postgresql postgresql-contrib -y
 
 - name: Install Postgres server
   apt: pkg=postgresql-server-dev-9.1  state=present
